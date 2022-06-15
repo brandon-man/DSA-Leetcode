@@ -6,7 +6,7 @@ var groupAnagrams = function(strs) {
     let hash = {};
     
     for (let str of strs) {
-        let key = [...str].sort().join("");
+        let key = [...str].sort();
         if (!hash[key]) {
             hash[key] = [];
         }
