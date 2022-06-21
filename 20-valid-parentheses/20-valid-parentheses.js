@@ -3,19 +3,14 @@
  * @return {boolean}
  */
 var isValid = function(s) {
-    if (s[0] === ")" || s[0] === "}" || s[0] === "]") return false;
-    
     let stack = [];
-    let hash = {")" : "(",
-                "}" : "{", 
-                "]" : "["
-               }
+    let hash = {")" : "(", "}" : "{", "]" : "["};
     
     for (let i = 0; i < s.length; i++) {
-        if (s[i] === "(" ||  s[i] === "[" || s[i] === "{") {
+        if (s[i] === "(" || s[i] === "{" || s[i] === "[") {
             stack.push(s[i]);
         } else if (stack[stack.length - 1] === hash[s[i]]) {
-            stack.pop()
+            stack.pop();
         } else {
             return false;
         }
@@ -24,9 +19,10 @@ var isValid = function(s) {
 };
 
 /**
-* use a stack - LIFO
-* use hash map to associate opening and closing parentheses
-* if left parentheses, push in
-* then check if right parentheses, pop if true
-* if stack is empty, return true;
+* create a hash table to associate opening and closing brackets
+* if opening bracket, push into stack
+* else if the last element in stack is equal to the associative value in the hash
+* remove from stack
+* else return false
+* check if the stack is empty
 */
