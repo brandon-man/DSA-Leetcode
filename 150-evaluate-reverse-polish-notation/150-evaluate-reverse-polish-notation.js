@@ -10,7 +10,8 @@ var evalRPN = function(tokens) {
                 stack.push(stack.pop() + stack.pop());
                 break;
             case "-":
-                stack.push(-stack.pop() + stack.pop());
+                let a = stack.pop(), b = stack.pop()
+                stack.push(b - a);
                 break;
             case "*":
                 stack.push(stack.pop() * stack.pop());
