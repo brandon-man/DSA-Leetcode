@@ -37,11 +37,11 @@ var threeSum = function(nums) {
 
 /**
 * solve for a + b + c = 0
-* left start at 1 and right start at last
+* left start at i+1 and right start at last
 * can sort array because we can afford the O(n log n) since solution is a O(n2)
 * loop ends at second last to not move with right
-* if the current number is positive, skip
-* break if the index is more than 0 and the number is duplicate
+* if the current number is positive, stop loop
+* skip if the index is more than 0 and the number is duplicate
 * if current + left + right = target
 * push the triplet numbers as an array into new array
 * check if the left and right numbers are duplicates and move the pointers
