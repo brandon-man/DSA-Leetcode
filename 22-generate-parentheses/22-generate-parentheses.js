@@ -7,13 +7,13 @@ var generateParenthesis = function(n) {
     // open < n, generate open p
     // close < open, generate close
     
-    // create stack and an array to push parentheses onto
-    let stack = [];
+    // create an array to push parentheses onto
+    let res = [];
     
     // create a backtrack function to generate parentheses
     function generateP(str, open, close) {
         if (open === n && close === n) {
-            return stack.push(str);
+            return res.push(str);
         }
         if (open < n) {
             generateP(str + "(", open+1, close)
@@ -26,5 +26,5 @@ var generateParenthesis = function(n) {
     
     generateP("", 0, 0)
     
-    return stack;
+    return res;
 };
