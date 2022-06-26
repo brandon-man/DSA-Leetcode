@@ -3,18 +3,22 @@
  * @return {string[]}
  */
 var generateParenthesis = function(n) {
-     const res = [];
-
-    const go = (l, r, s) => {
-    if (s.length === 2 * n) {
-      res.push(s);
-      return;
+  let res = [];
+    
+    function generatePara(str, open, close) {
+        if (open === n && close === n) {
+            return res.push(str);
+        }
+        
+        if (open < n) {
+            generatePara(str + '(', open+1, close);
+        }
+        
+        if (open > close) {
+            generatePara(str + ')', open, close+1);
+        }
     }
-
-    if (l < n) go(l + 1, r, s + '(');
-    if (r < l) go(l, r + 1, s + ')');
-  };
-
-  go(0, 0, '');
-  return res;
+    
+    generatePara('', 0, 0);
+    return res;
 };
