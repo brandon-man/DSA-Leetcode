@@ -14,7 +14,7 @@ var generateParenthesis = function(n) {
             generatePara(str + '(', open+1, close);
         }
         
-        if (open > close) {
+        if (close < open) {
             generatePara(str + ')', open, close+1);
         }
     }
