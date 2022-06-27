@@ -3,28 +3,27 @@
  * @return {string[]}
  */
 var generateParenthesis = function(n) {
-    // if open and close equals to n, return parentheses pushed into array
-    // open < n, generate open p
-    // close < open, generate close
+    // if open and close = n, end func and push str
+    // open < n, generate open parenthesis
+    // closed < open, generate closed p
     
-    // create an array to push parentheses onto
     let res = [];
     
-    // create a backtrack function to generate parentheses
-    function generateP(str, open, close) {
-        if (open === n && close === n) {
+    function generateParenthesis(str, open, closed) {
+        if (open === n && closed === n) {
             return res.push(str);
-        }
+        } 
+        
         if (open < n) {
-            generateP(str + "(", open+1, close)
+            generateParenthesis(`${str}(`, open+1, closed);
         }
         
-        if (close < open) {
-            generateP(str + ")", open, close+1);
+        if (closed < open) {
+            generateParenthesis(`${str})`, open, closed+1);
         }
     }
     
-    generateP("", 0, 0)
+    generateParenthesis("", 0, 0);
     
     return res;
 };
