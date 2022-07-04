@@ -3,20 +3,23 @@
  * @return {number[]}
  */
 var dailyTemperatures = function(temperatures) {
-    const res = new Array(temperatures.length).fill(0);
-    const stack = [];
+    // create an array filled with 0s
+    let result = new Array(temperatures.length).fill(0);
+    let stack = [];
     
-    for (let i = 0; i < temperatures.length; i++) {
-        const currTemp = temperatures[i];
-        
-        while(stack.length && stack[stack.length - 1][0] < currTemp) {
-            const [poppedTemp, poppedIndex] = stack.pop();
-            
-            res[poppedIndex] = i - poppedIndex;
+    // iterate thru each temp
+    temperatures.forEach((temp, index) => {
+        // while stack is not empty and the top of the stack is less than temp
+        while (stack.length && temperatures[stack[stack.length - 1]] < temp) {
+            // pop prev index from stack
+            let prev = stack.pop();
+            // prev index assigned to result is now index minus prev index
+            // calculates how many days until temp increases
+            result[prev] = index - prev;
         }
-        
-        stack.push([currTemp, i])
-    }
+        // push index into stack
+        stack.push(index);
+    });
     
-    return res;
+    return result;
 };
