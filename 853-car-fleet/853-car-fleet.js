@@ -5,27 +5,21 @@
  * @return {number}
  */
 var carFleet = function(target, position, speed) {
-        let len = position.length;
-    let map = new Map(), res = 0, lastTime = -1; // last time is the time last car reached target
+     let hash = new Map()//Use a hash map so we dont need to do stupid array shit
+    for(let i = 0; i<position.length; i++){
+        hash.set(position[i], speed[i])
+    }
+    position.sort(function (a,b) {return a-b})//We need to sort array so we are looking at closest to farthest
     
-    // store car position and its speed
-    for(let i = 0; i < len; i++){
-        map.set(position[i], speed[i]);
+    let stack = []
+    
+    stack.push(position.pop())
+    
+    while(position.length){
+        let fleetAhead = stack[stack.length-1]
+        let fleetBehind = position.pop()
+        if((target-fleetAhead)/hash.get(fleetAhead) < ((target)-fleetBehind)/hash.get(fleetBehind)) stack.push(fleetBehind) //Distance/vel = time, compare time. If time ahead is greater than time behind, then car will be behind car ahead. Otherwise, push fleet
     }
     
-    // sort cars with their position, with first car being the closest car to target
-    const sortedPos = [...map.keys()].sort((a, b) => b - a);
-    
-    for(let i = 0; i < len; i++){
-        let time = (target - sortedPos[i]) / map.get(sortedPos[i]);
-        
-        // case 1: if our curr car is fast and takes even less time to reach target then our last car, they will be merged
-        // case 2: our current car takes more time to reach target, it cant merge with the last car it has to be a new fleet
-        if(time > lastTime){ 
-            res++;
-            lastTime = time;
-        }
-    }
-    
-    return res;
+    return stack.length
 };
