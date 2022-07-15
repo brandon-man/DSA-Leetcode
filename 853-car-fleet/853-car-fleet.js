@@ -5,10 +5,10 @@
  * @return {number}
  */
 var carFleet = function(target, position, speed) {
-    let hash = new Map();
+    let map = new Map();
     
     for (let i = 0; i < position.length; i++) {
-        hash.set(position[i], speed[i]);
+        map.set(position[i], speed[i]);
     }
     
     position.sort((a, b) => a - b);
@@ -17,11 +17,12 @@ var carFleet = function(target, position, speed) {
     
     stack.push(position.pop());
     
-    while (position.length) {
+    while(position.length) {
         let fleetAhead = stack[stack.length - 1];
         let fleetBehind = position.pop();
-        if ((target - fleetAhead) / hash.get(fleetAhead) < ((target) - fleetBehind) / hash.get(fleetBehind))
-            stack.push(fleetBehind)
+        if ((target - fleetAhead) / map.get(fleetAhead) < (target - fleetBehind) / map.get(fleetBehind))
+            stack.push(fleetBehind);
     }
+    
     return stack.length;
-};
+}
