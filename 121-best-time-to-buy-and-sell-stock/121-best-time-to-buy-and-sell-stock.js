@@ -3,26 +3,17 @@
  * @return {number}
  */
 var maxProfit = function(prices) {
+    let buy = 0, sell = 1;
     let maxP = 0;
-    let left = 0, right = 1;
     
-    while (right < prices.length) {
-        if (prices[left] < prices[right]) {
-            let profit = prices[right] - prices[left];
-            maxP = Math.max(maxP, profit)
+    while (sell < prices.length) {
+        if (prices[buy] < prices[sell]) {
+            let profit = prices[sell] - prices[buy];
+            maxP = Math.max(maxP, profit);
         } else {
-            left = right;
+            buy = sell;
         }
-        right++;
+        sell++;
     }
     return maxP;
 };
-
-/**
-* left is buy and right is sell
-* move right first
-* profit = sell - buy
-* update current profit with highest
-* else shift left to right
-* move right pointer 
-*/
