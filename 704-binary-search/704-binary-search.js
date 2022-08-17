@@ -5,17 +5,16 @@
  */
 var search = function(nums, target) {
     let left = 0, right = nums.length - 1;
-    for (let i = 0; i < nums.length; i++) {
+    
+    while (left <= right) {
         let mid = Math.floor(right - left / 2);
         
         if (nums[mid] === target) {
             return mid;
         } else if (nums[mid] > target) {
-        
-            right--;
+            right = mid - 1;
         } else {
-          
-            left++;
+            left = mid + 1;
         }
     }
     return -1;
