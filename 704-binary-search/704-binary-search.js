@@ -11,10 +11,10 @@ var search = function(nums, target) {
         if (nums[mid] === target) {
             return mid;
         } else if (nums[mid] > target) {
-            mid = mid - 1;
+        
             right--;
         } else {
-            mid = mid + 1;
+          
             left++;
         }
     }
