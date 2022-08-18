@@ -11,7 +11,7 @@ var searchMatrix = function(matrix, target) {
     
     while (left <= right) {
         // ???
-        const mid = (left + right) >> 1;
+        const mid = Math.floor((left + right) / 2);
         const [row, col] = [(Math.floor(mid / cols)), (mid % cols)];
         const guess = matrix[row][col];
         
