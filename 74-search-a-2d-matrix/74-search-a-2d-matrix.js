@@ -4,18 +4,25 @@
  * @return {boolean}
  */
 var searchMatrix = function(matrix, target) {
-    for (let i = 0; i < matrix.length; i++) {
-        for (let j = 0; j < matrix[i].length; j++) {
-            if (matrix[i][j] === target) {
-                return true;
-            }
-        }
+    // rows = length of matrix, cols = first index of each arrays inside matrix
+    const [rows, cols] = [matrix.length, matrix[0].length];
+    // left = first pointer in array, right = rows * cols - 1
+    let [left, right] = [0, ((rows * cols) - 1)];
+    
+    while (left <= right) {
+        // ???
+        const mid = (left + right) >> 1;
+        const [row, col] = [(Math.floor(mid / cols)), (mid % cols)];
+        const guess = matrix[row][col];
+        
+        const isTarget = guess === target;
+        if (isTarget) return true;
+        
+        const isTargetGreater = guess < target;
+        if (isTargetGreater) left = mid + 1;
+
+        const isTargetLess = target < guess;
+        if (isTargetLess) right = mid - 1;
     }
     return false;
 };
-
-/**
-* 
-
-
-**/
