@@ -4,15 +4,16 @@
  * @return {boolean}
  */
 var searchMatrix = function(matrix, target) {
-    // determine rows and cols
+     // rows = length of matrix, cols = first index of each arrays inside matrix
     const [rows, cols] = [matrix.length, matrix[0].length];
-    // start from beginning and end of 2D matrix
+    // left = first pointer in array, right = rows * cols - 1
     let [left, right] = [0, ((rows * cols) - 1)];
     
     while (left <= right) {
-         const mid = Math.floor((left + right) / 2);
-         const [row, col] = [(Math.floor(mid / cols)), (mid % cols)]
-         const guess = matrix[row][col];
+        // ???
+        const mid = (left + right) >> 1;
+        const [row, col] = [(Math.floor(mid / cols)), (mid % cols)];
+        const guess = matrix[row][col];
         
         if (guess === target) return true;
         
