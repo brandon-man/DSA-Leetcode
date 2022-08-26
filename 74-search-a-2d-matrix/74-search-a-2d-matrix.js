@@ -4,23 +4,24 @@
  * @return {boolean}
  */
 var searchMatrix = function(matrix, target) {
-     // rows = length of matrix, cols = first index of each arrays inside matrix
     const [rows, cols] = [matrix.length, matrix[0].length];
-    // left = first pointer in array, right = rows * cols - 1
+    
     let [left, right] = [0, ((rows * cols) - 1)];
     
     while (left <= right) {
-        // ???
-        const mid = Math.floor((left + right) / 2);
-        // divide array index(mid) by cols to get row, mod mid by cols to get col
-        const [row, col] = [(Math.floor(mid / cols)), (mid % cols)];
-        const guess = matrix[row][col];
+        let mid = Math.floor((left + right) / 2);
+        // to find row and col
+        // mid / cols = row, mid % cols = col
+        let [row, col] = [Math.floor(mid / cols), mid % cols];
+        let match = matrix[row][col];
         
-        if (guess === target) return true;
-        
-        if (guess < target) left = mid + 1;
-
-        if (target < guess) right = mid - 1;
+        if (match < target) {
+            left = mid + 1;
+        } else if (match > target) {
+            right = mid - 1;
+        } else {
+            return true;
+        }
     }
     return false;
 };
