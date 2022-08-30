@@ -4,7 +4,6 @@
  * @return {number}
  */
 var minEatingSpeed = function(piles, h) {
-    // min of 1 bananas and max piles
     let [left, right] = [1, Math.max(...piles)];
     
     while (left < right) {
@@ -13,7 +12,7 @@ var minEatingSpeed = function(piles, h) {
         
         if (hourSpent <= h) right = mid;
         
-        if (h < hourSpent) left = mid + 1;
+        if (h < hourSpent) left = mid + 1; 
     }
     return right;
 };
